@@ -65,7 +65,7 @@ export default function Navbar() {
             <div className="rounded-lg bg-primary p-1">
               <div className="h-3 w-3 rounded-full bg-primary-foreground" />
             </div>
-            <span className="text-xl font-bold tracking-tight">VideoTube</span>
+            <span className="text-xl font-bold tracking-tight">Streamify</span>
           </Link>
         </div>
 
