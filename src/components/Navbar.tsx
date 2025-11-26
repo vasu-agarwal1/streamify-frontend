@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import apiClient from "@/helpers/axiosInstance";
+import UploadVideoModal from "./UploadVideoModal";
 
 export default function Navbar() {
   const router = useRouter();
@@ -95,9 +96,7 @@ export default function Navbar() {
              status && userData ? (
             <>
               {/* Upload Button (Desktop) */}
-              <Button variant="ghost" size="icon" className="hidden md:flex" title="Upload Video">
-                <Upload className="h-5 w-5" />
-              </Button>
+                <UploadVideoModal />
               
               {/* USER DROPDOWN MENU */}
               <DropdownMenu>
