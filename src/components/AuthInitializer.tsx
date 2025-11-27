@@ -34,7 +34,7 @@ export default function AuthInitializer({ children }: { children: React.ReactNod
 
     if (loading) {
         // Optional: Show a black screen or loading spinner while checking auth
-        return <div className="min-h-screen bg-black text-white flex justify-center items-center">Loading VideoTube...</div>;
+        return <div className="min-h-screen bg-black text-white flex justify-center items-center">Loading Streamify...</div>;
     }
 
     return <>{children}</>;
