@@ -30,23 +30,15 @@ export default function UploadVideoModal() {
 
       const formData = new FormData();
 
-
-
       formData.append("title", data.title)
       formData.append("description", data.description)
-
-
 
       formData.append("videoFile", data.videoFile[0]);
       formData.append("thumbnail", data.thumbnail[0]);
 
-
-
       await apiClient.post("/videos", formData);
 
-
-
-      setOpen(false); // Close popup
+      setOpen(false); // Close popup 
       reset(); // Clear form
       window.location.reload(); // Refresh to see new video
 
@@ -81,7 +73,7 @@ export default function UploadVideoModal() {
           </div>
         ) : (
           <form onSubmit={handleSubmit(publishVideo)} className="space-y-4">
-            {/* Video File Input */}
+   
             <div className="space-y-2">
               <Label htmlFor="video">Video File</Label>
               <Input
@@ -93,8 +85,7 @@ export default function UploadVideoModal() {
               />
               {errors.videoFile && <p className="text-red-500 text-xs">Video is required</p>}
             </div>
-
-            {/* Thumbnail Input */}
+ 
             <div className="space-y-2">
               <Label htmlFor="thumbnail">Thumbnail</Label>
               <Input
@@ -107,7 +98,6 @@ export default function UploadVideoModal() {
               {errors.thumbnail && <p className="text-red-500 text-xs">Thumbnail is required</p>}
             </div>
 
-            {/* Title Input */}
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
               <Input
@@ -117,7 +107,6 @@ export default function UploadVideoModal() {
               />
             </div>
 
-            {/* Description Input */}
             <div className="space-y-2">
               <Label htmlFor="description">Description</Label>
               <Textarea
