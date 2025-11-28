@@ -22,7 +22,7 @@ export default function UploadVideoModal() {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-  // THIS IS YOUR TEST AREA ⬇️
+  
   const publishVideo = async (data: any) => {
     try {
       setLoading(true);
