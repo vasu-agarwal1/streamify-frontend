@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import apiClient from "@/helpers/axiosInstance";
 import UploadVideoModal from "./UploadVideoModal";
+import { toggleSidebar } from "@/store/uiSlice";
 
 export default function Navbar() {
   const router = useRouter();
@@ -59,7 +60,7 @@ export default function Navbar() {
         
         {/* LEFT: Logo & Menu */}
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="shrink-0">
+          <Button variant="ghost" size="icon" className="shrink-0" onClick={() => dispatch(toggleSidebar())}>
             <Menu className="h-5 w-5" />
           </Button>
           <Link href="/" className="flex items-center gap-2">

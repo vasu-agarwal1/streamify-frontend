@@ -1,16 +1,14 @@
-import React from "react";
+
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-// 1. Define the shape of a Video (Matches your Backend Model)
-// src/components/VideoCard.tsx
 
 export interface Video {
   _id: string;
-  videoFile: string; // <--- NEW: The actual video URL
+  videoFile: string; 
   thumbnail: string;
   title: string;
-  description: string; // <--- NEW: The description text
+  description: string; 
   duration: number;
   views: number;
   createdAt: string;

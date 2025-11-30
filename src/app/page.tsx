@@ -14,12 +14,10 @@ export default function Home() {
     const fetchVideos = async () => {
       try {
         setLoading(true);
-        // GET Request to your backend
         const response = await apiClient.get("/videos"); 
         
-        console.log("Videos Fetched:", response.data); // Debug log
+        console.log("Videos Fetched:", response.data); 
         
-        // Based on your controller logic, the docs are inside data.docs
         setVideos(response.data.data.docs || []); 
       } catch (err) {
         console.error("Error fetching videos:", err);
