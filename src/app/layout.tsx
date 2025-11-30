@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/store/StoreProvider";
 import Navbar from "@/components/Navbar";
 import AuthInitializer from "@/components/AuthInitializer";
+import AppShell from "@/components/AppShell"; // <--- Import the Shell
 
 export const metadata: Metadata = {
   title: "Streamify",
-  description: "A video sharing platform",
+  description: "Next.js Video Platform",
 };
 
 export default function RootLayout({
@@ -17,13 +17,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body>
+      <body className="bg-background text-foreground">
         <StoreProvider>
           <AuthInitializer>
             <Navbar />
-             <div className="p-16">
-                {children}
-             </div>
+            
+            {/* Replace the old hardcoded divs with AppShell */}
+            <AppShell>
+               {children}
+            </AppShell>
+
           </AuthInitializer>
         </StoreProvider>
       </body>
