@@ -1,18 +1,29 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useParams } from "next/navigation"; // Hook to get the ID from URL
+import { useParams, useRouter } from "next/navigation"; 
+import { useSelector } from "react-redux"; 
 import apiClient from "@/helpers/axiosInstance";
 import { Loader2, ThumbsUp } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Video } from "@/components/VideoCard"; // Re-using the interface
+import { Video } from "@/components/VideoCard"; 
+import { RootState } from "@/store/store"; 
 
 export default function VideoPlayerPage() {
-  const { videoId } = useParams(); // Get ID from URL
+  const { videoId } = useParams();
+  const router = useRouter();
+  
+  // Redux: Check if user is logged in
+  const { status: isLoggedIn } = useSelector((state: RootState) => state.auth);
+
   const [video, setVideo] = useState<Video | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // === LIKE STATES ===
+  const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -20,8 +31,15 @@ export default function VideoPlayerPage() {
       try {
         setLoading(true);
         const response = await apiClient.get(`/videos/${videoId}`);
-        console.log("Single Video Data:", response.data);
         setVideo(response.data.data);
+
+        setIsLiked(response.data.data.isLiked || false);
+        setLikesCount(response.data.data.likesCount || 0);
+        
+        // Note: Ideally, the backend should return 'isLiked' and 'likesCount' here.
+        // For now, they default to false/0 until we upgrade the backend.
+        // setLikesCount(response.data.data.likesCount || 0);
+        // setIsLiked(response.data.data.isLiked || false);
       } catch (err: any) {
         console.error("Error fetching video:", err);
         setError("Failed to load video.");
@@ -32,6 +50,29 @@ export default function VideoPlayerPage() {
 
     fetchVideo();
   }, [videoId]);
+
+
+  const handleToggleLike = async () => {
+    // 1. Auth Check
+    if(!isLoggedIn){
+       router.push('/login');
+       return;
+    }
+
+    // 2. Optimistic UI (Update immediately)
+    setLikesCount(prev => isLiked ? prev - 1 : prev + 1);
+    setIsLiked(prev => !prev);
+
+    try {
+        // 3. Call Backend
+        await apiClient.post(`/likes/toggle/v/${videoId}`);
+    } catch (error) {
+        // 4. Rollback on failure
+        console.error("Failed to toggle like");
+        setLikesCount(prev => isLiked ? prev + 1 : prev - 1);
+        setIsLiked(prev => !prev);
+    }
+  };
 
   if (loading) {
     return (
@@ -52,7 +93,7 @@ export default function VideoPlayerPage() {
         {/* VIDEO PLAYER */}
         <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-gray-900 border border-gray-800 shadow-2xl">
           <video
-            src={video.videoFile} // The URL from Cloudinary
+            src={video.videoFile}
             poster={video.thumbnail}
             controls
             autoPlay
@@ -71,16 +112,27 @@ export default function VideoPlayerPage() {
               </span>
               
               <div className="flex gap-2">
-                 <Button variant="secondary" className="gap-2">
-                    <ThumbsUp className="h-4 w-4" /> Like
+                 {/* LIKE BUTTON */}
+                 <Button 
+                     variant="secondary" 
+                     className={`gap-2 transition-all duration-200 ${
+                     isLiked 
+                     ? "bg-purple-600 hover:bg-purple-700 text-white" 
+                     : "hover:bg-gray-800" 
+                    }`}
+
+                    onClick={handleToggleLike} 
+                 >
+                    <ThumbsUp className={`h-4 w-4 ${isLiked ? "fill-white" : ""}`} /> 
+                    {isLiked ? "Liked" : "Like"} 
+                    {/* Optional: Show count like this: {likesCount} */}
                  </Button>
               </div>
            </div>
         </div>
 
-        {/* CHANNEL INFO & DESCRIPTION */}
+        {/* CHANNEL INFO */}
         <div className="mt-4 flex gap-4 p-4 rounded-xl bg-gray-900/50 border border-gray-800">
-           {/* Avatar */}
            <Avatar className="h-12 w-12 border border-gray-700">
               <AvatarImage src={video.owner.avatar} />
               <AvatarFallback>{video.owner.username[0]}</AvatarFallback>
