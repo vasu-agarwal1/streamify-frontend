@@ -99,7 +99,7 @@ export default function Sidebar() {
 
       <div className="mt-auto p-4 border-t border-gray-800">
         <p className="text-xs text-gray-500">
-          © 2024 Streamify Inc.
+          © 2025 Streamify Inc.
           <br />
           All rights reserved.
         </p>
