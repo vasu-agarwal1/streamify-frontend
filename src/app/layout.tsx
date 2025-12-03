@@ -22,7 +22,6 @@ export default function RootLayout({
           <AuthInitializer>
             <Navbar />
             
-            {/* Replace the old hardcoded divs with AppShell */}
             <AppShell>
                {children}
             </AppShell>
