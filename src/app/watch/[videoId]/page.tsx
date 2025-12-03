@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Video } from "@/components/VideoCard"; 
 import { RootState } from "@/store/store"; 
+import VideoComments from "@/components/VideoComments";
 
 export default function VideoPlayerPage() {
   const { videoId } = useParams();
@@ -36,10 +37,6 @@ export default function VideoPlayerPage() {
         setIsLiked(response.data.data.isLiked || false);
         setLikesCount(response.data.data.likesCount || 0);
         
-        // Note: Ideally, the backend should return 'isLiked' and 'likesCount' here.
-        // For now, they default to false/0 until we upgrade the backend.
-        // setLikesCount(response.data.data.likesCount || 0);
-        // setIsLiked(response.data.data.isLiked || false);
       } catch (err: any) {
         console.error("Error fetching video:", err);
         setError("Failed to load video.");
@@ -125,7 +122,9 @@ export default function VideoPlayerPage() {
                  >
                     <ThumbsUp className={`h-4 w-4 ${isLiked ? "fill-white" : ""}`} /> 
                     {isLiked ? "Liked" : "Like"} 
-                    {/* Optional: Show count like this: {likesCount} */}
+                    <span className="ml-1 pl-2 border-l border-white/20 text-xs">
+                      {likesCount}
+                    </span>
                  </Button>
               </div>
            </div>
@@ -147,6 +146,10 @@ export default function VideoPlayerPage() {
               </p>
            </div>
         </div>
+
+        <div className="mt-6 border-t border-gray-800 pt-6">
+          <VideoComments videoId={videoId as string} />
+        </div>  
 
       </div>
     </div>
