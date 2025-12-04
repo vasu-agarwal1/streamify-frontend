@@ -22,7 +22,7 @@ export default function VideoPlayerPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // === LIKE STATES ===
+
   const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
 
@@ -61,10 +61,8 @@ export default function VideoPlayerPage() {
     setIsLiked(prev => !prev);
 
     try {
-        // 3. Call Backend
         await apiClient.post(`/likes/toggle/v/${videoId}`);
     } catch (error) {
-        // 4. Rollback on failure
         console.error("Failed to toggle like");
         setLikesCount(prev => isLiked ? prev + 1 : prev - 1);
         setIsLiked(prev => !prev);
