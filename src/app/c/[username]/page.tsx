@@ -65,10 +65,8 @@ export default function ChannelPage() {
       }) : null);
 
       try {
-          // 2. Call API
           await apiClient.get(`/subscriptions/c/${channel._id}`);
       } catch (error) {
-          // 3. Rollback on fail
           console.error("Failed to subscribe");
           setChannel(prev => prev ? ({
             ...prev,
