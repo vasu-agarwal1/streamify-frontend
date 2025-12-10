@@ -36,7 +36,6 @@ export default function ChannelPage() {
     const fetchChannel = async () => {
       try {
         setLoading(true);
-        // Ensure your backend route matches this!
         const response = await apiClient.get(`/users/c/${username}`);
         setChannel(response.data.data);
       } catch (err) {
@@ -50,11 +49,10 @@ export default function ChannelPage() {
     if (username) fetchChannel();
   }, [username]);
 
-  // Handle Subscribe (Optimistic UI)
+  
   const handleToggleSubscribe = async () => {
       if (!channel) return;
       
-      // 1. Optimistic Update
       const oldIsSubscribed = channel.isSubscribed;
       const oldCount = channel.subscribersCount;
 
@@ -84,7 +82,6 @@ export default function ChannelPage() {
     return <div className="text-center mt-20 text-red-500">{error || "Channel does not exist"}</div>;
   }
 
-  // Check if this is MY OWN profile
   const isMyChannel = currentUser?.username === channel.username;
 
   return (
