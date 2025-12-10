@@ -12,21 +12,23 @@ export interface Video {
   duration: number;
   views: number;
   createdAt: string;
+  isSubscribed: boolean;
   owner: {
+    _id: string;
     username: string;
     fullName: string;
     avatar: string;
   };
 }
 
-// Helper to format time (e.g., 65 seconds -> "1:05")
+
 const formatDuration = (seconds: number) => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
   return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
 };
 
-// Helper for "2 days ago"
+
 const formatTimeAgo = (dateString: string) => {
   const date = new Date(dateString);
   const now = new Date();
@@ -41,22 +43,22 @@ const formatTimeAgo = (dateString: string) => {
 export default function VideoCard({ video }: { video: Video }) {
   return (
     <div className="group flex flex-col gap-2 cursor-pointer">
-      {/* THUMBNAIL */}
+
       <Link href={`/watch/${video._id}`} className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/10">
         <img
           src={video.thumbnail}
           alt={video.title}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        {/* Duration Badge */}
+        
         <div className="absolute bottom-2 right-2 rounded bg-black/80 px-1.5 py-0.5 text-xs font-medium text-white">
           {formatDuration(video.duration)}
         </div>
       </Link>
 
-      {/* INFO SECTION */}
+    
       <div className="flex gap-3 items-start mt-2">
-        {/* Avatar */}
+      
         <Link href={`/c/${video.owner?.username}`}>
           <Avatar className="h-9 w-9 border border-transparent group-hover:border-white/50 transition-colors">
             <AvatarImage src={video.owner?.avatar} />
