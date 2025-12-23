@@ -65,7 +65,7 @@ export default function ChannelPage() {
       try {
           await apiClient.get(`/subscriptions/c/${channel._id}`);
       } catch (error) {
-          console.error("Failed to subscribe");
+          console.error("Failed to subscribe", error);
           setChannel(prev => prev ? ({
             ...prev,
             isSubscribed: oldIsSubscribed,
@@ -91,7 +91,7 @@ export default function ChannelPage() {
       <div className="relative w-full h-48 md:h-64 bg-gray-900">
           {/* Cover Image */}
           {channel.coverImage && (
-              <img src={channel.coverImage} className="w-full h-full object-cover opacity-80" />
+              <img src={channel.coverImage} className="w-full h-full object-cover opacity-80"  alt={`${channel.username}'s cover`} />
           )}
           <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-transparent" />
       </div>
