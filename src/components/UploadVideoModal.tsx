@@ -23,6 +23,7 @@ export default function UploadVideoModal() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
   
+
   const publishVideo = async (data: any) => {
     try {
       setLoading(true);
