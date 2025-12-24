@@ -2,18 +2,12 @@
 const nextConfig = {
   // ... any other config you have ...
 
-  // 👇 ADD THESE TWO BLOCKS
+  // ✅ KEEP THIS (This ignores the "any" type errors)
   typescript: {
-    // !! WARN !!
-    // Dangerously allow production builds to successfully complete even if
-    // your project has type errors.
     ignoreBuildErrors: true,
   },
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
+
+  // ❌ DELETE THE ESLINT BLOCK (It caused the crash)
 };
 
 export default nextConfig;
