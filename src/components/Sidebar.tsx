@@ -13,7 +13,8 @@ import {
   FolderHeart, 
   UserCheck, 
   Settings, 
-  HelpCircle 
+  HelpCircle, 
+  LayoutDashboard
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -59,9 +60,9 @@ export default function Sidebar() {
       href: `/c/${username}`,
     }] : []),
     {
-      icon: Settings,
-      label: "Settings",
-      href: "/settings",
+      icon: LayoutDashboard,
+      label: "Dashboard",
+      href: "/dashboard",
     },
     {
       icon: HelpCircle,
