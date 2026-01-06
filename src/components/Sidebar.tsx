@@ -50,7 +50,7 @@ export default function Sidebar() {
     },
     {
       icon: UserCheck,
-      label: "Subscribers",
+      label: "Subscribed to",
       href: "/subscriptions",
     },
     // We only add "My Channel" if the user is logged in
