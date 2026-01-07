@@ -55,7 +55,7 @@ export default function Sidebar() {
     },
     // We only add "My Channel" if the user is logged in
     ...(username ? [{
-      icon: UserCheck, // Or a different icon
+      icon: UserCheck, 
       label: "My Channel",
       href: `/c/${username}`,
     }] : []),
