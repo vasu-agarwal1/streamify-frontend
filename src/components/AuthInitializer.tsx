@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login, logout } from "@/store/authSlice";
 import apiClient from "@/helpers/axiosInstance";
+import { useRouter } from "next/navigation";
 
 export default function AuthInitializer({ children }: { children: React.ReactNode }) {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -20,6 +22,8 @@ export default function AuthInitializer({ children }: { children: React.ReactNod
                     // 2. Backend recognized the cookie! Restore Redux.
                     dispatch(login(response.data.data));
                 }
+
+                router.push("/");
             } catch (error) {
                 // 3. If error (401 Unauthorized), user is definitely logged out
                 console.log("User not logged in (Session check failed)", error);

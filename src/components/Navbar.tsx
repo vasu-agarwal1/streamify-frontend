@@ -2,13 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Search, Menu, Upload, LogOut, User, Settings, LayoutDashboard, Clapperboard } from "lucide-react";
+import { Search, Menu,  LogOut, User, Settings, LayoutDashboard, Clapperboard } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "@/store/authSlice";
 import { RootState } from "@/store/store";
 
-// ShadCN Imports (Look how clean they are)
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -49,7 +48,7 @@ export default function Navbar() {
 
   const hiddenRoutes = ["/login", "/signup"];
 
-  // If the current path is in the hidden list, return NOTHING (null)
+  
   if (hiddenRoutes.includes(pathname)) {
     return null;
   }
