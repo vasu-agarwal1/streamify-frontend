@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import apiClient from "@/helpers/axiosInstance";
-import VideoCard, { Video } from "@/components/VideoCard"; // <--- Import the Card
+import VideoCard, { Video } from "@/components/VideoCard"; 
 import { Loader2 } from "lucide-react";
 
 export default function Home() {
@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-white px-4 lg:px-8 py-6">
-      {/* Grid Layout for Cards */}
+      
       {videos.length === 0 ? (
         <div className="text-center mt-20 text-gray-500">No videos found. Be the first to upload!</div>
       ) : (
