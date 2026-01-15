@@ -30,6 +30,20 @@ export default function Navbar() {
   const { status, userData } = useSelector((state: RootState) => state.auth);
   const [isMounted, setIsMounted] = useState(false);
 
+  const [searchQuery, setSearchQuery] = useState("")
+
+  const handleSearch = () => {
+    if(!searchQuery.trim()) return
+
+    router.push(`/search?query=${encodeURIComponent(searchQuery.trim())}`);
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    } 
+  }
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -73,12 +87,16 @@ export default function Navbar() {
         {/* CENTER: Search Bar */}
         <div className="hidden w-1/3 items-center gap-2 md:flex">
             <div className="relative w-full">
-                <Input 
+                <Input
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={handleKeyDown} 
                     type="text" 
                     placeholder="Search videos..." 
                     className="w-full rounded-full bg-muted pl-4 pr-10 focus-visible:ring-1"
                 />
                 <Button 
+                    onClick={handleSearch}
                     size="icon" 
                     variant="ghost" 
                     className="absolute right-0 top-0 h-full rounded-r-full hover:bg-transparent"
