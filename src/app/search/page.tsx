@@ -8,7 +8,7 @@ import { Loader2, SearchX } from "lucide-react";
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
-  const query = searchParams.get("query"); // 1. Grab the search text from URL
+  const query = searchParams.get("query"); 
 
   const [videos, setVideos] = useState<Video[]>([])
   const [loading, setLoading] = useState(false)
@@ -52,14 +52,14 @@ export default function SearchPage() {
       </h1>
 
       {videos.length === 0 ? (
-        // Empty State
+        
         <div className="flex flex-col items-center justify-center mt-20 text-gray-500">
           <SearchX className="h-16 w-16 mb-4 opacity-50" />
           <p className="text-lg">No videos found matching your search.</p>
           <p className="text-sm">Try different keywords.</p>
         </div>
       ) : (
-        // Results Grid
+  
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {videos.map((video) => (
             <VideoCard key={video._id} video={video} />
