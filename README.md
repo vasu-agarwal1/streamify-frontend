@@ -9,7 +9,7 @@
 ---
 
 ## 🚀 Live Demo
-**[🔗 Click here to visit Streamify Live](https://streamify-frontend-vasu.vercel.app)** *(Host on Vercel & Render)*
+**[🔗 Click here to visit Streamify Live](https://streamify-sable-kappa.vercel.app/)** *(Host on Vercel & Render)*
 
 ---
 
